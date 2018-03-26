@@ -1,4 +1,4 @@
-package com.example.liaochieh_yu.gogo2.fragment;
+package com.example.liaochieh_yu.gogo2.Main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

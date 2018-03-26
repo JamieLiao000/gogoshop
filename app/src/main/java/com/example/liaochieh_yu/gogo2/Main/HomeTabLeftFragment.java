@@ -1,4 +1,4 @@
-package com.example.liaochieh_yu.gogo2.fragment;
+package com.example.liaochieh_yu.gogo2.Main;
 
 
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liaochieh_yu.gogo2.R;
-import com.example.liaochieh_yu.gogo2.model.Promotion;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 

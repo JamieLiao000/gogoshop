@@ -1,17 +1,10 @@
-package com.example.liaochieh_yu.gogo2.fragment;
+package com.example.liaochieh_yu.gogo2.Main;
 
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,15 +16,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.liaochieh_yu.gogo2.MainActivity;
 import com.example.liaochieh_yu.gogo2.R;
-import com.example.liaochieh_yu.gogo2.model.Product;
-import com.example.liaochieh_yu.gogo2.model.Promotion;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.example.liaochieh_yu.gogo2.R.color.lightgrey;
 
 /**
  * Created by liaochieh-yu on 2018/3/20.

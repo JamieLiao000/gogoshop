@@ -1,15 +1,17 @@
-package com.example.liaochieh_yu.gogo2.model;
+package com.example.liaochieh_yu.gogo2.Main;
 
 /**
  * Created by liaochieh-yu on 2018/3/21.
  */
 
-public class Promotion {
+public class Product {
     private String name;
+    private int price;
     private int pic;
-    public  Promotion(){}
-    public Promotion(String name, int pic) {
+
+    public Product(String name, int price, int pic) {
         this.name = name;
+        this.price = price;
         this.pic = pic;
     }
 
@@ -19,6 +21,14 @@ public class Promotion {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public int getPic() {
