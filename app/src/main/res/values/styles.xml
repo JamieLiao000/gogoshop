@@ -17,4 +17,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="button_style" parent="Theme.AppCompat">
+        <item name="colorControlHighlight">#22a1ab</item>
+        <item name="colorButtonNormal">#16E8B1</item>
+        <item name="colorAccent">#FFF</item>
+    </style>
+    <style name="edit_text_style" parent="Theme.AppCompat">
+        <item name="android:maxLength">30</item>
+
+
+    </style>
 </resources>

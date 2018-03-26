@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.liaochieh_yu.gogo2.R;
 
@@ -22,6 +23,7 @@ public class HomeFragment extends Fragment{
     public static ViewPager viewPager;
     public static int int_items = 2  ;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class HomeFragment extends Fragment{
         View view=inflater.inflate(R.layout.home_tab,null);
         tabLayout=view.findViewById(R.id.tabs);
         viewPager=view.findViewById(R.id.viewpager);
+       
+
         /**
          *Set an Apater for the View Pager
          */

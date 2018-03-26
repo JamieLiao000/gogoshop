@@ -25,7 +25,7 @@
             android:layout_marginLeft="8dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="left|bottom"
-            android:text="早安"
+
             android:textColor="@color/lightgrey"
             android:textSize="15sp" />
 

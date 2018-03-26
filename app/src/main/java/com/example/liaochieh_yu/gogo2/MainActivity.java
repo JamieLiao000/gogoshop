@@ -6,6 +6,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,13 +16,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.liaochieh_yu.gogo2.Main.HomeFragment;
+import com.example.liaochieh_yu.gogo2.Main.LogInActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
     FragmentManager myFragmentManager;
     FragmentTransaction myFragmentTransaction;
+    private final int LOGIN_REQUEST = 0;
+    TextView draweUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,7 @@ public class MainActivity extends AppCompatActivity
         myFragmentManager=getSupportFragmentManager();
         myFragmentTransaction = myFragmentManager.beginTransaction();
         myFragmentTransaction.replace(R.id.containerView, new HomeFragment()).commit();
-
+        //設定浮動按鈕
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -45,7 +51,9 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -53,11 +61,15 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Drawer User
+
     }//onCreate end
 
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -81,7 +93,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_login) {
-            return true;
+
+            Intent intent=new Intent(MainActivity.this,LogInActivity.class);
+            startActivityForResult(intent,LOGIN_REQUEST);
+
+
         }
 
 
@@ -100,7 +116,7 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_singlecase) {
             Intent intent=new Intent(MainActivity.this,PurchaseCaseActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent,LOGIN_REQUEST);
 
         } else if (id == R.id.nav_groupbuying) {
 
@@ -114,4 +130,25 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+//    @Override                              //(請求代碼 , 結果代碼 , 回傳回來的intent物件)
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        //判斷請求代碼是否相同，確認來源是否正確
+//        if(resultCode==LOGIN_REQUEST){
+//
+//            switch (resultCode) {
+//                case RESULT_OK:
+//
+//
+//                    break;
+//                case RESULT_CANCELED:
+//
+//                    break;
+//            }
+//        }
+//
+//
+//    }
+
 }

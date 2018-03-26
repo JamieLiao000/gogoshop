@@ -1,9 +1,31 @@
 <resources>
-    <string name="app_name">gogo2</string>
+    <string name="app_name">gogoshop</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="search_type">搜尋方式</string>
     <string name="action_settings">Settings</string>
+    <!--ToolBar 右上icon-->
+    <string name="log_in_btn">LOG IN</string>
+    <!--Tab 選項-->
+    <string name="home_tab_left">最新活動</string>
+    <string name="home_tab_right">促銷商品</string>
+    <!--Drawer 選項-->
+    <string name="drawer_item_01">官方商店</string>
+    <string name="drawer_item_02">活動專區</string>
+    <string name="drawer_item_03">代購專區</string>
+    <string name="drawer_item_04">團購專區</string>
+    <!--首頁排序 下拉選單-->
+    <string name="spinner_orderBy_01">最新上市</string>
+    <string name="spinner_orderBy_02">價錢低到高</string>
+    <string name="spinner_orderBy_03">價錢高到低</string>
+    <!--Log in page-->
+    <string name="hint_etUser">user name</string>
+    <string name="hint_etPassword">password</string>
+
+    <string name="msg_InvalidUserOrPassword">User name or password invalid</string>
+
+
+
 
 </resources>

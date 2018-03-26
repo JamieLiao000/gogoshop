@@ -7,19 +7,19 @@
         <item
             android:id="@+id/nav_gogoshop"
             android:icon="@drawable/icons_go"
-            android:title="官方商店" />
+            android:title="@string/drawer_item_01" />
         <item
             android:id="@+id/nav_sale"
             android:icon="@drawable/icons_bang"
-            android:title="活動專區" />
+            android:title="@string/drawer_item_02" />
         <item
             android:id="@+id/nav_singlecase"
             android:icon="@drawable/icons_travel"
-            android:title="代購專區" />
+            android:title="@string/drawer_item_03" />
         <item
             android:id="@+id/nav_groupbuying"
             android:icon="@drawable/icons_group"
-            android:title="團購專區" />
+            android:title="@string/drawer_item_04" />
     </group>
 
     <item android:title="Communicate">

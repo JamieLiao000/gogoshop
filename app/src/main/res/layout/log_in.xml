@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradientcolor_radius"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:ignore="HardcodedText">
+
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="40dp"
+            android:src="@drawable/gogoshop_t"
+            android:layout_marginBottom="50dp"/>
+        <TextView
+
+            android:id="@+id/tvMessage"
+            android:textColor="#da6368"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+
+            />
+        <EditText
+
+            android:theme="@style/edit_text_style"
+            android:id="@+id/etUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_etUser"
+            android:maxHeight="40dp"
+            android:textColor="@color/colorPrimaryDark">
+
+        </EditText>
+
+        <EditText
+            android:theme="@style/edit_text_style"
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_etPassword"
+            android:inputType="textPassword"
+            android:maxHeight="40dp"
+            android:textColor="@color/colorPrimaryDark" />
+        <Button
+            android:theme="@style/button_style"
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:scaleX="0"
+            android:scaleY="0"
+            android:text="Login"
+            />
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="50dp"
+        android:contentDescription="@string/app_name"
+        android:elevation="50dp"
+        android:src="@drawable/logo"
+        tools:visibility="gone" />
+</FrameLayout>
