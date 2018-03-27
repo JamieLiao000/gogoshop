@@ -16,21 +16,7 @@
         app:showAsAction="always"
         android:title="Mem"
         android:visible="false"/>
-    <item
-        android:id="@+id/mem_popup_01"
-        android:title="Member01"
-        app:showAsAction="never"
-        android:visible="false"/>
-    <item
-        android:id="@+id/mem_popup_02"
-        android:title="Member02"
-        app:showAsAction="never"
-        android:visible="false"
-        />
-    <item
-        android:id="@+id/mem_popup_03"
-        android:title="Member03"
-        app:showAsAction="never" android:visible="false"/>
+
 
 
 

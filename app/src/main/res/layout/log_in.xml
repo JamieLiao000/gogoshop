@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/hint_etUser"
             android:maxHeight="40dp"
-            android:textColor="@color/colorPrimaryDark">
+            android:textColor="#EEE">
 
         </EditText>
 
@@ -53,7 +53,7 @@
             android:hint="@string/hint_etPassword"
             android:inputType="textPassword"
             android:maxHeight="40dp"
-            android:textColor="@color/colorPrimaryDark" />
+            android:textColor="#EEE" />
         <Button
             android:theme="@style/button_style"
             android:id="@+id/login"
