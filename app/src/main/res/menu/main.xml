@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <item
         android:id="@+id/action_login"
         android:orderInCategory="100"
         android:title="@string/log_in_btn"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_member"
+        android:orderInCategory="80"
+
+        android:icon="@drawable/icons_member"
+        app:showAsAction="always"
+        android:title="Mem"
+        android:visible="false"/>
+    <item
+        android:id="@+id/mem_popup_01"
+        android:title="Member01"
+        app:showAsAction="never"
+        android:visible="false"/>
+    <item
+        android:id="@+id/mem_popup_02"
+        android:title="Member02"
+        app:showAsAction="never"
+        android:visible="false"
+        />
+    <item
+        android:id="@+id/mem_popup_03"
+        android:title="Member03"
+        app:showAsAction="never" android:visible="false"/>
+
+
 
 </menu>

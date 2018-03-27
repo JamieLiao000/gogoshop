@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment{
         View view=inflater.inflate(R.layout.home_tab,null);
         tabLayout=view.findViewById(R.id.tabs);
         viewPager=view.findViewById(R.id.viewpager);
-       
+
 
         /**
          *Set an Apater for the View Pager

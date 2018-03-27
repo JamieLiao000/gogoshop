@@ -10,6 +10,8 @@
     <!--Tab 選項-->
     <string name="home_tab_left">最新活動</string>
     <string name="home_tab_right">促銷商品</string>
+    <!--Drawer header-->
+    <string name="drawer_welcome">歡迎光臨 gogoshop</string>
     <!--Drawer 選項-->
     <string name="drawer_item_01">官方商店</string>
     <string name="drawer_item_02">活動專區</string>

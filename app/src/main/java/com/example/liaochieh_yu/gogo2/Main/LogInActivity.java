@@ -15,11 +15,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.liaochieh_yu.gogo2.Member.MemberDAO;
 import com.example.liaochieh_yu.gogo2.Member.MemberDAOImpl;
 import com.example.liaochieh_yu.gogo2.Others.Util;
 import com.example.liaochieh_yu.gogo2.R;
+
+import static com.example.liaochieh_yu.gogo2.Others.Util.showToast;
 
 /**
  * Created by liaochieh-yu on 2018/3/26.
@@ -34,40 +37,45 @@ public class LogInActivity extends AppCompatActivity{
     private EditText etUser,etPassword;
     private TextView tvMessage;
     private Button btLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
         findViews();
         animate();
+        setResult(RESULT_CANCELED);
 
 
 
     }
-    @Override//onCreate()後緊接著就是onStart()
-    protected void onStart() {
-        super.onStart();
-        SharedPreferences pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
-        boolean login=pref.getBoolean("login",false);//如果拿不到  就回傳第二個參數
-            /*login...true之前有登入過了*/
-        if(login){
-            String account=pref.getString("account","");//把帳號密碼從偏好設定檔內取出
-            String password=pref.getString("password","");
-            if(isMember(account,password)){
-                Intent intent=new Intent();
-                intent.putExtra("account",account);
-
-                Log.d("這裡這裡", intent.getStringExtra("account"));
-                setResult(RESULT_OK,intent);
-                finish();
-            }
-            else {
-                showMessage(R.string.msg_InvalidUserOrPassword);
-            }
-
-        }
-
-    }
+//    @Override//onCreate()後緊接著就是onStart()
+//    protected void onStart() {
+//        super.onStart();
+//        SharedPreferences pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
+//        boolean login=pref.getBoolean("login",false);//如果拿不到  就回傳第二個參數
+//            /*login...true之前有登入過了*/
+//
+//        if(login){
+//            String account=pref.getString("account","");//把帳號密碼從偏好設定檔內取出
+//            String password=pref.getString("password","");
+//            if(isMember(account,password)){
+//                Intent intent=new Intent();
+//                intent.putExtra("account",account);
+//
+//                Log.d("這裡這裡", intent.getStringExtra("account"));
+//                setResult(RESULT_OK,intent);
+//                finish();
+//            }
+//            else {
+//                Log.d("LogInActivity","JJJJJJJ");
+//                showMessage(R.string.msg_InvalidUserOrPassword);
+//            }
+//
+//        }
+//        Log.d("LogInActivity","錯誤驗證");
+//
+//    }
 
 
 
@@ -127,6 +135,7 @@ public class LogInActivity extends AppCompatActivity{
         etUser=findViewById(R.id.etUser);
         etPassword=findViewById(R.id.etPassword);
         btLogin=findViewById(R.id.login);
+        tvMessage=findViewById(R.id.tvMessage);
         /**按下登入的處理**/
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,11 +157,13 @@ public class LogInActivity extends AppCompatActivity{
 
                    Log.d("這裡這裡", intent.getStringExtra("account"));
                    setResult(RESULT_OK,intent);
+                   Toast.makeText(view.getContext(), "登入成功....", Toast.LENGTH_LONG).show();
                    finish();
 
                }
                else {
                    showMessage(R.string.msg_InvalidUserOrPassword);
+
                }
             }
         });
