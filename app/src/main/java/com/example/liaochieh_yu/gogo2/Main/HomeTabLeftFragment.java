@@ -1,6 +1,11 @@
 package com.example.liaochieh_yu.gogo2.Main;
 
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.liaochieh_yu.gogo2.MainActivity;
+import com.example.liaochieh_yu.gogo2.Others.Util;
+import com.example.liaochieh_yu.gogo2.Promotion.PromotionDAO;
+import com.example.liaochieh_yu.gogo2.Promotion.PromotionDAOImpl;
+import com.example.liaochieh_yu.gogo2.Promotion.PromotionVO;
 import com.example.liaochieh_yu.gogo2.R;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
@@ -31,6 +41,9 @@ public class HomeTabLeftFragment extends Fragment {
     CarouselView carouselView;
     RecyclerView recyclerView;
     ImageButton heartButton;
+    private ProgressDialog progressDialog;
+    private GetAllPromotions task;
+    private List<PromotionVO> promotionList;
 
     int[] sampleImages = {R.drawable.carousel01, R.drawable.carousel02, R.drawable.carousel03};
 
@@ -44,31 +57,17 @@ public class HomeTabLeftFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-
-
-//Log.d("我的訊息2",String.valueOf(numOfRecycler));
         recyclerView.setLayoutManager(layoutManager);
+        /**出任務**/
+        task = new GetAllPromotions();
+        task.execute();
 
-
-        final List<Promotion> promotionList = new ArrayList<>();
-        promotionList.add(new Promotion("春季活動", R.drawable.carousel03));
-        promotionList.add(new Promotion("夏季活動", R.drawable.carousel02));
-        promotionList.add(new Promotion("秋季活動", R.drawable.carousel01));
-        promotionList.add(new Promotion("冬季活動", R.drawable.carousel03));
-        promotionList.add(new Promotion("冬季活動", R.drawable.carousel02));
-        promotionList.add(new Promotion("冬季活動", R.drawable.carousel01));
-        promotionList.add(new Promotion("冬季活動", R.drawable.carousel02));
-        promotionList.add(new Promotion("冬季活動", R.drawable.carousel03));
-
-
-        recyclerView.setAdapter(new PromotionAdapter(promotionList));
         return rootView;
     }
+     private class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.ViewHolder> {
+        private List<PromotionVO> promotionList;
 
-    private class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.ViewHolder> {
-        private List<Promotion> promotionList;
-
-        public PromotionAdapter(List<Promotion> promotionList) {
+        public PromotionAdapter(List<PromotionVO> promotionList) {
             this.promotionList = promotionList;
         }
 
@@ -78,19 +77,21 @@ public class HomeTabLeftFragment extends Fragment {
             return new ViewHolder(view);
 
         }
-
-
-        @Override//3
+       @Override//3
         public void onBindViewHolder(PromotionAdapter.ViewHolder holder, int position) {
-            final Promotion pro = promotionList.get(position);
-            holder.iView.setImageResource(pro.getPic());
-            holder.tTitle.setText(pro.getName());
+            final PromotionVO promotionVO = promotionList.get(position);
+            byte[] bytesPic=promotionVO.getPmtpic();
+             Bitmap bitmap = BitmapFactory.decodeByteArray(bytesPic, 0, bytesPic.length);
+
+
+            holder.iView.setImageBitmap(bitmap);
+            holder.tTitle.setText(promotionVO.getPmt_name());
             Log.d("我的", String.valueOf(position));
             /*處理點擊活動跳轉事件點擊*/
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(), pro.getName(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), promotionVO.getPmt_name(), Toast.LENGTH_LONG).show();
                 }
             });
             /*處理收藏事件點擊*/
@@ -101,9 +102,7 @@ public class HomeTabLeftFragment extends Fragment {
                 }
             });
 
-
-
-        }
+       }
 
         @Override
         public int getItemCount() {
@@ -142,6 +141,38 @@ public class HomeTabLeftFragment extends Fragment {
             });
         }
     };//carouselView click end
+    /**出任務拿回 活動集合**/
+    class GetAllPromotions extends AsyncTask<String ,Integer,List<PromotionVO>>{
+        @Override
+        protected void onPreExecute() {
+            progressDialog=new ProgressDialog(getActivity());
+            progressDialog.setMessage("loading");
+            progressDialog.show();
+
+
+        }
+
+        @Override
+        protected List<PromotionVO> doInBackground(String... strings) {
+            PromotionDAO dao=new PromotionDAOImpl();
+            promotionList =dao.getAll();
+            return promotionList;
+        }
+
+        @Override
+        protected void onPostExecute(List<PromotionVO> promotionList) {
+            progressDialog.cancel();
+            if(promotionList==null||promotionList.isEmpty()){
+                Util.showToast(getActivity(),"promotion not found");
+            }
+            showPromotionsView(getActivity(),promotionList);
+
+
+        }
+    }
+    public void showPromotionsView(Context context, List<PromotionVO> promotionList){
+        recyclerView.setAdapter(new PromotionAdapter(promotionList));
+    }
 
 
 

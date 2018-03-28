@@ -27,6 +27,8 @@
 
     <string name="msg_InvalidUserOrPassword">User name or password invalid</string>
 
+    <string name="msg_loading">Loading...</string>
+
 
 
 
