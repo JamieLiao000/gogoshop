@@ -34,8 +34,10 @@ public class HomeTabRightFragment extends Fragment {
         //SPINNER
         spSearch = rootView.findViewById(R.id.spSearch);
         String[] searchType = {"最新上市", "價錢低到高", "價錢高到低"};
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.spinner_item, searchType);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown);
+
         spSearch.setAdapter(adapter);
         spSearch.setSelection(0, true);
         spSearch.setOnItemSelectedListener(listener);

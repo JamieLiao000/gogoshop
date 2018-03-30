@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:icon="@drawable/icons_go"
+        android:id="@+id/pay_item_01"
+        android:title="信用卡匯款"
+        />
+    <item
+        android:id="@+id/pay_item_02"
+android:title="現金匯款"
+        />
+    <item
+        android:id="@+id/pay_item_03"
+android:title="ATM匯款" />
+</menu>

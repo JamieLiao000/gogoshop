@@ -41,7 +41,7 @@ public class PromotionDAOImpl implements PromotionDAO{
             con.connect();
 
             dos=new DataOutputStream(con.getOutputStream());
-            String content = "action=getAll&imageSize=600";/*（請求參數的組合）*/
+            String content = "action=getAll&imageSize=500";/*（請求參數的組合）*/
             dos.writeBytes(content);
             dos.flush();
 

@@ -3,6 +3,7 @@ package com.example.liaochieh_yu.gogo2;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,8 +24,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liaochieh_yu.gogo2.Main.HomeFragment;
+import com.example.liaochieh_yu.gogo2.Main.HomeTabLeftFragment;
 import com.example.liaochieh_yu.gogo2.Main.LogInActivity;
+import com.example.liaochieh_yu.gogo2.Member.MeberDetailActivity;
+import com.example.liaochieh_yu.gogo2.Member.MemberDAOImpl;
+import com.example.liaochieh_yu.gogo2.Member.MemberVO;
 import com.example.liaochieh_yu.gogo2.Others.Util;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
@@ -34,7 +44,8 @@ public class MainActivity extends AppCompatActivity
     private final int LOGIN_REQUEST = 0;
     TextView userDrawerTextView;
     boolean login ;
-    SharedPreferences pref;
+    public SharedPreferences pref;
+    private GetMemAllDetail task;
 
 
     @Override
@@ -78,8 +89,11 @@ public class MainActivity extends AppCompatActivity
         /**檢查他有沒有登入過**/
         pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
         login=pref.getBoolean("login",false);
+
         if(login){
             userDrawerTextView.setText(pref.getString("account","歡迎光臨"));
+
+
 
         }
 
@@ -131,6 +145,7 @@ public class MainActivity extends AppCompatActivity
         else if(id==R.id.action_member){
             View menuItemView=findViewById(R.id.action_member);
            PopupMenu popupMenu= new PopupMenu(this,menuItemView);
+
            popupMenu.inflate(R.menu.mem_popup_menu);
            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                @Override
@@ -138,16 +153,19 @@ public class MainActivity extends AppCompatActivity
                    /*右上角會員視窗popup處理*/
                    switch (menuItem.getItemId()){
                        case R.id.mem_popup_01:
-                           Toast.makeText(getParent(),"member01",Toast.LENGTH_SHORT).show();
+
                            break;
                        case R.id.mem_popup_02:
+                           Intent intentMem=new Intent(MainActivity.this,MeberDetailActivity.class);
+                           startActivity(intentMem);
 
                            break;
                        case R.id.mem_popup_logout:
                            /*登出處理*/
                            SharedPreferences pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
                            pref.edit().putBoolean("login",false).apply();
-                           pref.edit().remove("account").apply();  pref.edit().remove("password").apply();
+                           pref.edit().remove("account").commit();  pref.edit().remove("password").commit();
+                           pref.edit().remove("MemberProfile").commit();
 
                            Toast.makeText(MainActivity.this, "登出....", Toast.LENGTH_LONG).show();
                            Intent intent=new Intent(MainActivity.this,LogInActivity.class);
@@ -188,8 +206,11 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_groupbuying) {
 
         } else if (id == R.id.nav_share) {
+            Intent intent=new Intent(MainActivity.this,TestActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_send) {
+
 
         }
 
@@ -198,6 +219,31 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+    class GetMemAllDetail extends AsyncTask<Void,Void,MemberVO>{
+        SharedPreferences pref = getSharedPreferences(
+                Util.PREF_FILE, MODE_PRIVATE);
+        final String account = pref.getString("account", "");
+        final String password = pref.getString("password", "");
+
+        @Override
+        protected MemberVO doInBackground(Void... params) {
+            return new MemberDAOImpl().findByAccandPsw(account,password);
+        }
+        @Override
+        protected void onPostExecute(MemberVO member) {
+            if (member == null) {
+               Log.d(TAG,"cant get member profile");
+                 return;
+            }
+            Gson gson=new Gson();
+            String memJson=gson.toJson(member);
+
+
+            pref.edit().putString("MemberProfile",memJson).commit();
+        }
+
+
+    }
 
 
 
@@ -209,6 +255,9 @@ public class MainActivity extends AppCompatActivity
             MainActivity.this.invalidateOptionsMenu();//在呼叫onCreateOptionMenu
             if(resultCode== RESULT_OK){
                     userDrawerTextView.setText(data.getStringExtra("account"));
+                /*登入成功 去撈會員的資料回來*/
+                task = new GetMemAllDetail();
+                task.execute();
              }
             else if(resultCode== RESULT_CANCELED){
 

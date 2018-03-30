@@ -49,34 +49,6 @@ public class LogInActivity extends AppCompatActivity{
 
 
     }
-//    @Override//onCreate()後緊接著就是onStart()
-//    protected void onStart() {
-//        super.onStart();
-//        SharedPreferences pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
-//        boolean login=pref.getBoolean("login",false);//如果拿不到  就回傳第二個參數
-//            /*login...true之前有登入過了*/
-//
-//        if(login){
-//            String account=pref.getString("account","");//把帳號密碼從偏好設定檔內取出
-//            String password=pref.getString("password","");
-//            if(isMember(account,password)){
-//                Intent intent=new Intent();
-//                intent.putExtra("account",account);
-//
-//                Log.d("這裡這裡", intent.getStringExtra("account"));
-//                setResult(RESULT_OK,intent);
-//                finish();
-//            }
-//            else {
-//                Log.d("LogInActivity","JJJJJJJ");
-//                showMessage(R.string.msg_InvalidUserOrPassword);
-//            }
-//
-//        }
-//        Log.d("LogInActivity","錯誤驗證");
-//
-//    }
-
 
 
     private void animate(){
@@ -158,6 +130,7 @@ public class LogInActivity extends AppCompatActivity{
                    Log.d("這裡這裡", intent.getStringExtra("account"));
                    setResult(RESULT_OK,intent);
                    Toast.makeText(view.getContext(), "登入成功....", Toast.LENGTH_LONG).show();
+                   /**/
                    finish();
 
                }

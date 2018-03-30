@@ -59,8 +59,8 @@ public class HomeTabLeftFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         /**出任務**/
-        task = new GetAllPromotions();
-        task.execute();
+//        task = new GetAllPromotions();
+//        task.execute();
 
         return rootView;
     }
@@ -165,6 +165,7 @@ public class HomeTabLeftFragment extends Fragment {
             if(promotionList==null||promotionList.isEmpty()){
                 Util.showToast(getActivity(),"promotion not found");
             }
+
             showPromotionsView(getActivity(),promotionList);
 
 

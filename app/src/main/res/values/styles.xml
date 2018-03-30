@@ -22,9 +22,13 @@
         <item name="colorButtonNormal">#16E8B1</item>
         <item name="colorAccent">#FFF</item>
     </style>
+
     <style name="edit_text_style" parent="Theme.AppCompat">
         <item name="android:maxLength">30</item>
 
 
+    </style>
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">15sp</item>
     </style>
 </resources>

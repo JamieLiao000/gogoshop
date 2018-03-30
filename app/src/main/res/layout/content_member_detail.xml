@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+     tools:showIn="@layout/content_member_detail">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   >
+
+    <Button
+        android:id="@+id/btnUpdateProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onCartClick"
+        android:text="修改會員資料"
+        android:background="#EEE"
+        android:layout_marginBottom="2dp"/>
+
+    <Button
+        android:id="@+id/btnOrderHistory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onOrderHistoryClick"
+        android:background="#EEE"
+        android:text="訂單"
+        android:layout_marginBottom="2dp"/>
+
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onUpdateProfileClick"
+        android:background="#EEE"
+        android:text="哈哈哈"
+        android:layout_marginBottom="2dp"/>
+
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onLogoutClick"
+        android:background="#EEE"
+        android:text="哈哈哈"
+        android:layout_marginBottom="2dp"/>
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onLogoutClick"
+        android:background="#EEE"
+        android:text="參與的代購"
+        android:layout_marginBottom="2dp"/>
+    <Button
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onLogoutClick"
+        android:background="#EEE"
+        android:text="收藏商品"
+        android:layout_marginBottom="2dp"/>
+</LinearLayout>
+</android.support.v4.widget.NestedScrollView>

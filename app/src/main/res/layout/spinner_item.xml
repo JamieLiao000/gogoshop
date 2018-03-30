@@ -10,4 +10,5 @@
     android:textSize="13sp"
     android:singleLine="true"
     android:text="New Text"
-    android:id="@+id/textView32" />
+    android:id="@+id/textView32"
+    android:textAlignment="center"/>

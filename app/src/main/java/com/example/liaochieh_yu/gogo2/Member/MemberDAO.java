@@ -6,6 +6,8 @@ package com.example.liaochieh_yu.gogo2.Member;
 
 public interface MemberDAO {
     boolean isMember(String account, String password);
+    MemberVO findByAccandPsw(String account, String password);
+    boolean update(MemberVO member);
 
 
 
