@@ -237,8 +237,6 @@ public class MainActivity extends AppCompatActivity
             }
             Gson gson=new Gson();
             String memJson=gson.toJson(member);
-
-
             pref.edit().putString("MemberProfile",memJson).commit();
         }
 

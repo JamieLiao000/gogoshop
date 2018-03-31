@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.liaochieh_yu.test.ScrollingActivity">
+    tools:context="com.example.liaochieh_yu.gogo2.TestActivity"
+    android:id="@+id/outerLayout">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -50,7 +51,34 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_scrolling" />
+    <!--<include layout="@layout/content_scrolling" />-->
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.example.liaochieh_yu.gogo2.TestActivity"
+        tools:showIn="@layout/inner_test"
+        android:id="@+id/nest_scrollview"
+        >
+
+
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:nestedScrollingEnabled="true"
+
+
+        />
+
+  <!--</LinearLayout>-->
+    </android.support.v4.widget.NestedScrollView>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_join"
@@ -60,7 +88,11 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end"
         app:fabSize="normal"
-        app:srcCompat="@drawable/icons_go" />
+        app:srcCompat="@drawable/icons_add_list"
+        app:useCompatPadding="true"
+        android:scaleType="center"
+        />
+
 
 
 </android.support.design.widget.CoordinatorLayout>

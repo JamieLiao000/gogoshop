@@ -24,7 +24,7 @@
         </activity>
         <activity
             android:name=".PurchaseCaseActivity"
-            android:label="代購專區" />
+            android:label="PurchaseCase" />
         <activity
             android:name=".Main.LogInActivity"
             android:label="LOG IN" />
