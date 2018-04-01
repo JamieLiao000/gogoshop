@@ -8,8 +8,9 @@ import android.widget.Toast;
  */
 
 public class Util {
+//    public static String URL = "http://10.0.2.2:8081/BA107_G4/";
     // 模擬器連Tomcat
-    public static String URL = "http://10.0.2.2:8081/BA107_G4/";
+    public static String URL = "http://192.168.196.119:8081/BA107_G4/";
     // 偏好設定檔案名稱
     public final static String PREF_FILE = "preference";
     public static void showToast(Context context, int messageResId) {

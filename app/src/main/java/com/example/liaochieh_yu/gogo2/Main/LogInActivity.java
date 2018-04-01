@@ -120,9 +120,9 @@ public class LogInActivity extends AppCompatActivity{
                }
                if(isMember(account,password)){
                    SharedPreferences pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
-                   pref.edit().putBoolean("login",true)/*登入過了*/
-                           .putString("account",account)
-                           .putString("password",password)
+                   pref.edit().putBoolean("gogoshoplogin",true)/*登入過了*/
+                           .putString("gogoshopaccount",account)
+                           .putString("gogoshoppassword",password)
                            .apply();
                    Intent intent=new Intent();
                    intent.putExtra("account",account);

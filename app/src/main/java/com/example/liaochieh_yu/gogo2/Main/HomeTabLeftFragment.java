@@ -59,8 +59,8 @@ public class HomeTabLeftFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         /**出任務**/
-//        task = new GetAllPromotions();
-//        task.execute();
+        task = new GetAllPromotions();
+        task.execute();
 
         return rootView;
     }
@@ -148,8 +148,6 @@ public class HomeTabLeftFragment extends Fragment {
             progressDialog=new ProgressDialog(getActivity());
             progressDialog.setMessage("loading");
             progressDialog.show();
-
-
         }
 
         @Override

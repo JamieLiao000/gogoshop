@@ -41,8 +41,8 @@
 
         <android.support.v7.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="55dp"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -58,34 +58,53 @@
                 android:id="@+id/caseTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
                 android:text="TextView"
                 android:textColor="#777"
+                android:letterSpacing="0.2"
                 android:textSize="13sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="2dp"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/caseContent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
                 android:layout_marginBottom="2dp"
+                android:text="TextView"
+                android:textColor="#777"
                 android:textSize="12sp"
-                android:textColor="#777"/>
+                android:letterSpacing="0.2"
+                android:lineSpacingMultiplier="1.2"
+                />
 
             <TextView
                 android:id="@+id/caseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="12sp"
                 android:text="TextView"
-                android:textColor="#777"/>
+                android:textColor="#777"
+                android:letterSpacing="0.2"
+                android:textSize="12sp" />
 
 
         </android.support.v7.widget.LinearLayoutCompat>
 
         <ImageView
-            android:layout_width="6dp"
+            android:id="@+id/icon_case"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="@dimen/cardview_compat_inset_shadow"
+            android:scaleType="fitXY"
+            app:src="@drawable/icons_face"
+
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+
+            android:layout_width="4dp"
             android:layout_height="match_parent"
             android:background="@drawable/gradientcolor_vertical"
             card_view:layout_constraintBottom_toBottomOf="parent"

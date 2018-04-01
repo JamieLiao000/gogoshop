@@ -1,6 +1,5 @@
 package com.example.liaochieh_yu.gogo2;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -24,17 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.liaochieh_yu.gogo2.Main.HomeFragment;
-import com.example.liaochieh_yu.gogo2.Main.HomeTabLeftFragment;
 import com.example.liaochieh_yu.gogo2.Main.LogInActivity;
 import com.example.liaochieh_yu.gogo2.Member.MeberDetailActivity;
 import com.example.liaochieh_yu.gogo2.Member.MemberDAOImpl;
 import com.example.liaochieh_yu.gogo2.Member.MemberVO;
 import com.example.liaochieh_yu.gogo2.Others.Util;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
@@ -88,10 +82,10 @@ public class MainActivity extends AppCompatActivity
         //Drawer User
         /**檢查他有沒有登入過**/
         pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
-        login=pref.getBoolean("login",false);
+        login=pref.getBoolean("gogoshoplogin",false);
 
         if(login){
-            userDrawerTextView.setText(pref.getString("account","歡迎光臨"));
+            userDrawerTextView.setText(pref.getString("gogoshopaccount","歡迎光臨"));
 
 
 
@@ -115,7 +109,7 @@ public class MainActivity extends AppCompatActivity
         // Inflate the menu; this adds items to the action bar if it is present.
        getMenuInflater().inflate(R.menu.main, menu);
 
-        if ( pref.getBoolean("login",false)) {
+        if ( pref.getBoolean("gogoshoplogin",false)) {
 
             Log.d("測試Main","!!!");
             MenuItem menuItemMem= menu.findItem(R.id.action_member);
@@ -163,9 +157,9 @@ public class MainActivity extends AppCompatActivity
                        case R.id.mem_popup_logout:
                            /*登出處理*/
                            SharedPreferences pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
-                           pref.edit().putBoolean("login",false).apply();
-                           pref.edit().remove("account").commit();  pref.edit().remove("password").commit();
-                           pref.edit().remove("MemberProfile").commit();
+                           pref.edit().putBoolean("gogoshoplogin",false).apply();
+                           pref.edit().remove("gogoshopaccount").commit();  pref.edit().remove("gogoshoppassword").commit();
+                           pref.edit().remove("gogoshopMemberProfile").commit();
 
                            Toast.makeText(MainActivity.this, "登出....", Toast.LENGTH_LONG).show();
                            Intent intent=new Intent(MainActivity.this,LogInActivity.class);
@@ -199,11 +193,13 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_sale) {
 
         } else if (id == R.id.nav_singlecase) {
-            Intent intent=new Intent(MainActivity.this,PurchaseCaseActivity.class);
-            startActivityForResult(intent,LOGIN_REQUEST);
+            Intent intent=new Intent(MainActivity.this,ComCaseActivity.class);
+            startActivity(intent);
 
 
         } else if (id == R.id.nav_groupbuying) {
+            Intent intent=new Intent(MainActivity.this,ComGroupCaseActivity.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_share) {
             Intent intent=new Intent(MainActivity.this,TestActivity.class);
@@ -222,8 +218,8 @@ public class MainActivity extends AppCompatActivity
     class GetMemAllDetail extends AsyncTask<Void,Void,MemberVO>{
         SharedPreferences pref = getSharedPreferences(
                 Util.PREF_FILE, MODE_PRIVATE);
-        final String account = pref.getString("account", "");
-        final String password = pref.getString("password", "");
+        final String account = pref.getString("gogoshopaccount", "");
+        final String password = pref.getString("gogoshoppassword", "");
 
         @Override
         protected MemberVO doInBackground(Void... params) {
@@ -237,7 +233,7 @@ public class MainActivity extends AppCompatActivity
             }
             Gson gson=new Gson();
             String memJson=gson.toJson(member);
-            pref.edit().putString("MemberProfile",memJson).commit();
+            pref.edit().putString("gogoshopMemberProfile",memJson).commit();
         }
 
 
