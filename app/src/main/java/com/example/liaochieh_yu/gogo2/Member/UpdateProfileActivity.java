@@ -129,7 +129,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     private void fillForms() {
         pref = getSharedPreferences(Util.PREF_FILE, MODE_PRIVATE);
-        String memberProfile = pref.getString("MemberProfile", "");
+        String memberProfile = pref.getString("gogoshopMemberProfile", "");
         if (memberProfile.isEmpty()) {
             Log.d(TAG, "there is no Profile in SharedPreferences.xml !");
         }
@@ -208,7 +208,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 //更新成功後,修改偏好設定檔裡的東西!
                 Gson gson = new Gson();
                 String memJson = gson.toJson(memberVO);
-                pref.edit().putString("MemberProfile", memJson).commit();
+                pref.edit().putString("gogoshopMemberProfile", memJson).commit();
                 finish();
 
 
