@@ -1,0 +1,110 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.liaochieh_yu.gogo2.TestActivity$PlaceholderFragment"
+    android:padding="16dp">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tvGProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#888"
+            android:textSize="14sp"
+
+            android:layout_marginBottom="4dp"
+      />
+        <TextView
+            android:id="@+id/tvStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="發起時間：2018-09-15"
+            android:textColor="#888"
+            android:textSize="14sp"
+
+            android:layout_marginBottom="4dp"
+
+
+         />
+        <TextView
+            android:id="@+id/tvEndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="截止時間：2018-09-15"
+            android:textColor="@color/pink"
+            android:textSize="14sp"
+
+            android:layout_marginBottom="4dp"
+
+            />
+        <TextView
+            android:id="@+id/tvOwner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="發起人：LALA2"
+            android:textColor="#888"
+            android:textSize="14sp"
+
+            android:layout_marginBottom="4dp"
+
+            />
+
+        <TextView
+
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="參與人數：5"
+            android:textColor="#888"
+            android:textSize="14sp"
+
+            android:layout_marginBottom="4dp"
+
+            />
+        <TextView
+            android:id="@+id/tvCaseContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+  android:text="@string/large_text"
+           />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="180dp"
+                tools:ignore="Suspicious0dp"
+                android:layout_weight="1"
+                android:src="@drawable/pro_nike_02"
+                android:scaleType="centerCrop"
+                />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="180dp"
+                tools:ignore="Suspicious0dp"
+                android:layout_weight="1"
+                android:src="@drawable/pro_nike_01"
+                android:scaleType="centerCrop"
+                />
+
+        </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>

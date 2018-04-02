@@ -1,49 +1,55 @@
 package com.example.liaochieh_yu.gogo2;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+
+import android.util.Log;
+
 
 import com.example.liaochieh_yu.gogo2.Com.ComDAO;
 import com.example.liaochieh_yu.gogo2.Com.ComDAOImpl;
 import com.example.liaochieh_yu.gogo2.Com.ComVO;
 import com.example.liaochieh_yu.gogo2.Others.Util;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
+
+
+/**
+ * Created by liaochieh-yu on 2018/4/1.
+ */
+
+
+
 
 /**
  * Created by liaochieh-yu on 2018/3/25.
  */
 
-public class ComCaseActivity extends AppCompatActivity {
-    private static final String TAG = "ComCaseActivity";
+public class ComGroupCaseActivity extends AppCompatActivity {
+    private static final String TAG = "ComGroupCaseActivity";
 
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
-    private GetAllComCases task;
+    private GetAllComGroupCases task;
     private List<ComVO> comList;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.d(TAG,"近來代購案件頁面");
+        Log.d(TAG,"團購案件頁面");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.purchase_case_list);
         recyclerView = findViewById(R.id.recyclerview_purchase);
@@ -53,11 +59,9 @@ public class ComCaseActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        final List<ComVO> comList = new ArrayList<>();
 
-        task = new GetAllComCases();
+        task = new GetAllComGroupCases();
         task.execute();
-//        recyclerView.setAdapter(new ComAdapter(comList));
 
 
     }
@@ -71,8 +75,8 @@ public class ComCaseActivity extends AppCompatActivity {
 
         @Override
         public  ComAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.purchase_case_single, parent, false);
-         return  new ViewHolder(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.purchase_case_group, parent, false);
+            return  new ViewHolder(view);
         }
 
         @Override
@@ -84,25 +88,6 @@ public class ComCaseActivity extends AppCompatActivity {
             holder.caseTitle.setText(comVO.getCom_tit());
             holder.caseContent.setText(comVO.getCom_cnt());
             holder.caseDate.setText(comVO.getCom_it_sts());
-            //把物件轉為json字串帶過去下一頁
-//            Gson gson=new Gson();
-//            final String theComCase=gson.toJson(comVO);
-
-             /*處理點擊活動跳轉事件點擊*/
-//             Log.d(TAG,theComCase);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent=new Intent(ComCaseActivity.this,ComCaseDetailActivity.class);
-//                    intent.putExtra("theComCase",theComCase);
-                    Bundle bundle =new Bundle();
-                    bundle.putSerializable("theComeCase",comVO);
-                    intent.putExtras(bundle);
-
-                    Toast.makeText(ComCaseActivity.this, comVO.getCom_tit(), Toast.LENGTH_LONG).show();
-                    startActivity(intent);
-                }
-            });
         }
 
         @Override
@@ -124,10 +109,10 @@ public class ComCaseActivity extends AppCompatActivity {
         }
     }
     /**出任務拿回 集合**/
-    class GetAllComCases extends AsyncTask<String ,Integer,List<ComVO>> {
+    class GetAllComGroupCases extends AsyncTask<String ,Integer,List<ComVO>> {
         @Override
         protected void onPreExecute() {
-            progressDialog=new ProgressDialog(ComCaseActivity.this);
+            progressDialog=new ProgressDialog(ComGroupCaseActivity.this);
             progressDialog.setMessage("loading");
             progressDialog.show();
         }
@@ -136,7 +121,7 @@ public class ComCaseActivity extends AppCompatActivity {
         protected List<ComVO>  doInBackground(String... strings) {
             Log.d(TAG,"do IN Background");
             ComDAO dao=new ComDAOImpl();
-            comList =dao.getSingleCase();
+            comList =dao.getGroupBuyCase();
             return comList;
         }
 
@@ -144,10 +129,10 @@ public class ComCaseActivity extends AppCompatActivity {
         protected void onPostExecute(List<ComVO> comList) {
             progressDialog.cancel();
             if(comList==null||comList.isEmpty()){
-                Util.showToast(ComCaseActivity.this,"case not found");
+                Util.showToast(ComGroupCaseActivity.this,"case not found");
             }
 
-            showPromotionsView(ComCaseActivity.this,comList);
+            showPromotionsView(ComGroupCaseActivity.this,comList);
 
 
         }
@@ -156,3 +141,5 @@ public class ComCaseActivity extends AppCompatActivity {
         recyclerView.setAdapter(new ComAdapter(comList));
     }
 }
+
+

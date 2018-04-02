@@ -34,12 +34,7 @@
 
     <string name="large_text">
       "老司機我做過功課了,如果把運費壓到1000以下一定比較便宜的,不管是自家用還是放在店裡都超高CP的\n "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-
-
-    </string>
+     </string>
     <string name="msg_BooksNotFound">Books not found</string>
 
     <string name="msg_UserIdExist">User ID exists</string>

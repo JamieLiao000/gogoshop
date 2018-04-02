@@ -8,6 +8,7 @@ public interface MemberDAO {
     boolean isMember(String account, String password);
     MemberVO findByAccandPsw(String account, String password);
     boolean update(MemberVO member);
+    MemberVO findById(String memId);
 
 
 

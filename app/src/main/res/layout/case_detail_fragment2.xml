@@ -1,0 +1,42 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.liaochieh_yu.gogo2.TestActivity$PlaceholderFragment"
+   >
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+
+            >
+            <ImageView
+                android:id="@+id/casePic1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/pro_nike_02"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                tools:ignore="Suspicious0dp" />
+            <ImageView
+                android:id="@+id/casePic2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:src="@drawable/pro_nike_01"
+                android:scaleType="centerCrop"
+                tools:ignore="Suspicious0dp" />
+
+        </LinearLayout>
+
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

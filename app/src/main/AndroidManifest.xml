@@ -26,6 +26,9 @@
             android:name=".ComCaseActivity"
             android:label="PurchaseCase" />
         <activity
+            android:name=".ComCaseDetailActivity"
+            android:label="Case info" />
+        <activity
             android:name=".ComGroupCaseActivity"
             android:label="GroupBuy" />
         <activity

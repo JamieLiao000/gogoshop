@@ -30,6 +30,7 @@ import com.example.liaochieh_yu.gogo2.Member.MemberVO;
 import com.example.liaochieh_yu.gogo2.Others.Util;
 import com.google.gson.Gson;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
     private  static  final String TAG="MainActivity";
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     TextView userDrawerTextView;
     boolean login ;
     public SharedPreferences pref;
-    private GetMemAllDetail task;
+//    private GetMemAllDetail task;
 
 
     @Override
@@ -72,13 +73,18 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
-
         userDrawerTextView = (TextView) header.findViewById(R.id.drawerUser);
-
         navigationView.setNavigationItemSelectedListener(this);
+
+
+    }//onCreate end
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         //Drawer User
         /**檢查他有沒有登入過**/
         pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
@@ -87,11 +93,10 @@ public class MainActivity extends AppCompatActivity
         if(login){
             userDrawerTextView.setText(pref.getString("gogoshopaccount","歡迎光臨"));
 
-
-
         }
+        MainActivity.this.invalidateOptionsMenu();
 
-    }//onCreate end
+    }
 
     @Override
     public void onBackPressed() {
@@ -111,11 +116,12 @@ public class MainActivity extends AppCompatActivity
 
         if ( pref.getBoolean("gogoshoplogin",false)) {
 
-            Log.d("測試Main","!!!");
+            Log.d("有登入過的人","!!!");
             MenuItem menuItemMem= menu.findItem(R.id.action_member);
             menuItemMem.setVisible(true);
             MenuItem menuItemLogin= menu.findItem(R.id.action_login);
             menuItemLogin.setVisible(false);
+
         }
         Log.d(TAG,"訪客visited");
 
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity
         /*訪客*/
         if (id == R.id.action_login) {
              Intent intent=new Intent(MainActivity.this,LogInActivity.class);
-            startActivityForResult(intent,LOGIN_REQUEST);
+             startActivityForResult(intent,LOGIN_REQUEST);
         }
         /*會員*/
         else if(id==R.id.action_member){
@@ -158,9 +164,7 @@ public class MainActivity extends AppCompatActivity
                            /*登出處理*/
                            SharedPreferences pref=getSharedPreferences(Util.PREF_FILE,MODE_PRIVATE);
                            pref.edit().putBoolean("gogoshoplogin",false).apply();
-                           pref.edit().remove("gogoshopaccount").commit();  pref.edit().remove("gogoshoppassword").commit();
-                           pref.edit().remove("gogoshopMemberProfile").commit();
-
+                           pref.edit().remove("gogoshopaccount").remove("gogoshoppassword").remove("gogoshopMemberProfile").apply();
                            Toast.makeText(MainActivity.this, "登出....", Toast.LENGTH_LONG).show();
                            Intent intent=new Intent(MainActivity.this,LogInActivity.class);
                            userDrawerTextView.setText(R.string.drawer_welcome);
@@ -195,8 +199,6 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_singlecase) {
             Intent intent=new Intent(MainActivity.this,ComCaseActivity.class);
             startActivity(intent);
-
-
         } else if (id == R.id.nav_groupbuying) {
             Intent intent=new Intent(MainActivity.this,ComGroupCaseActivity.class);
             startActivity(intent);
@@ -215,53 +217,27 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    class GetMemAllDetail extends AsyncTask<Void,Void,MemberVO>{
-        SharedPreferences pref = getSharedPreferences(
-                Util.PREF_FILE, MODE_PRIVATE);
-        final String account = pref.getString("gogoshopaccount", "");
-        final String password = pref.getString("gogoshoppassword", "");
-
-        @Override
-        protected MemberVO doInBackground(Void... params) {
-            return new MemberDAOImpl().findByAccandPsw(account,password);
-        }
-        @Override
-        protected void onPostExecute(MemberVO member) {
-            if (member == null) {
-               Log.d(TAG,"cant get member profile");
-                 return;
-            }
-            Gson gson=new Gson();
-            String memJson=gson.toJson(member);
-            pref.edit().putString("gogoshopMemberProfile",memJson).commit();
-        }
 
 
-    }
-
-
-
-//    @Override                              //(請求代碼 , 結果代碼 , 回傳回來的intent物件)
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //判斷請求代碼是否相同，確認來源是否正確
-        if(requestCode==LOGIN_REQUEST){
-
-            MainActivity.this.invalidateOptionsMenu();//在呼叫onCreateOptionMenu
-            if(resultCode== RESULT_OK){
-                    userDrawerTextView.setText(data.getStringExtra("account"));
-                /*登入成功 去撈會員的資料回來*/
-                task = new GetMemAllDetail();
-                task.execute();
-             }
-            else if(resultCode== RESULT_CANCELED){
-
-            Log.d(TAG,"返回失敗");
-
-            }
-
-         }
-
-
-    }
+    //    @Override                              //(請求代碼 , 結果代碼 , 回傳回來的intent物件)
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        //判斷請求代碼是否相同，確認來源是否正確
+//        if(requestCode==LOGIN_REQUEST){
+//
+//            MainActivity.this.invalidateOptionsMenu();//在呼叫onCreateOptionMenu
+//            if(resultCode== RESULT_OK){
+//                Log.d("AAAAA","OKOKOKOKOK");
+//             }
+//            else if(resultCode== RESULT_CANCELED){
+//
+//            Log.d(TAG,"返回失敗");
+//
+//            }
+//
+//         }
+//
+//
+//
+//    }
 
 }

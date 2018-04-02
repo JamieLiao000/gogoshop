@@ -186,5 +186,59 @@ public class MemberDAOImpl implements MemberDAO{
 
     }
 
+    @Override
+    public MemberVO findById(String memId) {
+        String urlString = Util.URL + "MemberServlet";
+        DataOutputStream dos = null;
+        HttpURLConnection con = null;
+        StringBuilder strBuIn = null;//讀進來的
+
+
+        URL url= null;
+        try {
+            url = new URL(urlString);
+            con= (HttpURLConnection) url.openConnection();
+            con.setDoOutput(true);
+            con.setDoInput(true);
+            con.setRequestMethod("POST");
+            con.setUseCaches(false);
+            con.connect();
+            /********************************  送出去  ***********************************/
+            dos=new DataOutputStream(con.getOutputStream());
+            String outStr="action=findById&memId="+memId;
+            dos.writeBytes(outStr);
+            dos.flush();
+            /********************************  傳回來  ***********************************/
+            int statusCode=con.getResponseCode();
+            if(statusCode==HttpURLConnection.HTTP_OK){
+                BufferedReader br=new BufferedReader(new InputStreamReader(con.getInputStream()));
+                strBuIn=new StringBuilder();
+                String strLine=null;
+                while ((strLine = br.readLine()) != null) {
+                    strBuIn.append(strLine);
+                }
+                br.close();
+            }else {
+                Log.e(TAG, "statusCode = " + statusCode);
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+        finally {
+            if (dos != null) {
+                try {
+                    dos.close();
+                } catch (IOException e) {
+                    Log.e(TAG, e.toString());
+                }
+            }
+            if (con != null) {
+                con.disconnect();
+            }
+        }
+        return new Gson().fromJson(strBuIn.toString(), MemberVO.class);
+    }
+
 
 }

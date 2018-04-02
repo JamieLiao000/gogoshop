@@ -17,10 +17,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.liaochieh_yu.gogo2.MainActivity;
 import com.example.liaochieh_yu.gogo2.Member.MemberDAO;
 import com.example.liaochieh_yu.gogo2.Member.MemberDAOImpl;
+import com.example.liaochieh_yu.gogo2.Member.MemberVO;
 import com.example.liaochieh_yu.gogo2.Others.Util;
 import com.example.liaochieh_yu.gogo2.R;
+import com.google.gson.Gson;
+
+import java.util.concurrent.ExecutionException;
 
 import static com.example.liaochieh_yu.gogo2.Others.Util.showToast;
 
@@ -37,6 +42,8 @@ public class LogInActivity extends AppCompatActivity{
     private EditText etUser,etPassword;
     private TextView tvMessage;
     private Button btLogin;
+    private  static  final String TAG="LogInActivity";
+    private GetMemAllDetail task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,11 +133,27 @@ public class LogInActivity extends AppCompatActivity{
                            .apply();
                    Intent intent=new Intent();
                    intent.putExtra("account",account);
+                   /*登入成功 去撈會員的資料回來*/
+//                   setResult(RESULT_OK);
+                   task = new GetMemAllDetail();
+                   try {
+                       MemberVO memberVO=task.execute().get();
+                       Gson gson=new Gson();
+                        String memJson=gson.toJson(memberVO);
+                        Log.d(TAG+"有沒有撈到會員資料啊",memJson);
+                     pref.edit().putString("gogoshopMemberProfile",memJson).apply();
 
-                   Log.d("這裡這裡", intent.getStringExtra("account"));
-                   setResult(RESULT_OK,intent);
+                   } catch (InterruptedException |ExecutionException e) {
+                       e.printStackTrace();
+                   }
+
+                   Log.d("出去抓會員資料結束","");
+
+                   setResult(RESULT_OK);
+
                    Toast.makeText(view.getContext(), "登入成功....", Toast.LENGTH_LONG).show();
                    /**/
+
                    finish();
 
                }
@@ -140,6 +163,29 @@ public class LogInActivity extends AppCompatActivity{
                }
             }
         });
+    }
+    //撈會員資料回來 存進去
+    class GetMemAllDetail extends AsyncTask<Void,Void,MemberVO>{
+        SharedPreferences pref = getSharedPreferences(
+                Util.PREF_FILE, MODE_PRIVATE);
+        final String account = pref.getString("gogoshopaccount", "");
+        final String password = pref.getString("gogoshoppassword", "");
+
+        @Override
+        protected MemberVO doInBackground(Void... params) {
+            return new MemberDAOImpl().findByAccandPsw(account,password);
+        }
+//        @Override
+//        protected void onPostExecute(MemberVO member) {
+//            if (member == null) {
+//                Log.d(TAG,"cant get member profile");
+//                return;
+//            }
+//
+////
+//        }
+
+
     }
 
     private void showMessage(int msgResId) {
